@@ -1,0 +1,51 @@
+<script lang="ts">
+  import ChevronRightIcon from "@lucide/svelte/icons/chevron-right";
+  import ChevronLeftIcon from "@lucide/svelte/icons/chevron-left";
+  import ChevronDownIcon from "@lucide/svelte/icons/chevron-down";
+  import UserIcon from "@lucide/svelte/icons/user";
+  import PaletteIcon from "@lucide/svelte/icons/palette";
+  import MailwarningIcon from "@lucide/svelte/icons/mail-warning";
+  import SettingsIcon from "@lucide/svelte/icons/settings";
+  import { Menu, Portal } from "@skeletonlabs/skeleton-svelte";
+</script>
+
+<Menu>
+  <Menu.Trigger class="btn preset-filled"><UserIcon /></Menu.Trigger>
+  <Portal>
+    <Menu.Positioner>
+      <Menu.Content>
+        <Menu.Item value="feedback" class="flex justify-start gap-1">
+          <MailwarningIcon />
+          <Menu.ItemText>Feedback</Menu.ItemText>
+        </Menu.Item>
+        <Menu.Item value="settings" class="flex justify-start gap-1">
+          <SettingsIcon />
+          <Menu.ItemText>Settings</Menu.ItemText>
+        </Menu.Item>
+        <Menu.Separator />
+        <Menu>
+          <Menu.TriggerItem value="themes" class="flex justify-start gap-1">
+            <PaletteIcon />
+            <Menu.ItemText>Themes</Menu.ItemText>
+            <Menu.ItemIndicator class="ml-3 ">
+              <ChevronDownIcon class="size-5" />
+            </Menu.ItemIndicator>
+          </Menu.TriggerItem>
+
+          <Portal>
+            <Menu.Positioner>
+              <Menu.Content>
+                <Menu.Item value="crimson">
+                  <Menu.ItemText>Crimson</Menu.ItemText>
+                </Menu.Item>
+                <Menu.Item value="catppuccin">
+                  <Menu.ItemText>Catppuccin</Menu.ItemText>
+                </Menu.Item>
+              </Menu.Content>
+            </Menu.Positioner>
+          </Portal>
+        </Menu>
+      </Menu.Content>
+    </Menu.Positioner>
+  </Portal>
+</Menu>
