@@ -14,14 +14,7 @@
   let comboValue = $state("");
   const placeQuery = new Debounced(() => comboValue, 500);
 
-  const data = [
-    { label: "Apple", value: "apple" },
-    { label: "Banana", value: "banana" },
-    { label: "Orange", value: "orange" },
-    { label: "Carrot", value: "carrot" },
-    { label: "Broccoli", value: "broccoli" },
-    { label: "Spinach", value: "spinach" }
-  ];
+  const data = [];
 
   let items = $state(data);
 
@@ -29,12 +22,10 @@
     if (placeQuery.current && placeQuery.current.length >= 3) {
       const data = await fetch(`/api/places?query=${placeQuery.current}`);
       const dataJson = await data.json();
-      console.log("🚀 ~ dataJson:", dataJson);
       items = dataJson.data
         .filter(({ city_name, icao_code }) => city_name && icao_code)
         .slice(0, 10)
         .map(({ city_name, icao_code }) => ({ label: city_name, value: icao_code }));
-      $inspect(items);
     }
   });
 
@@ -61,6 +52,11 @@
       items = data;
     }
   };
+
+  function onSelect(e) {
+    comboValue = e.itemValue;
+    console.log("🚀 ~ onSelect ~ comboValue:", comboValue)
+  }
 </script>
 
 <div class="w-full card preset-outlined p-4">
@@ -72,6 +68,8 @@
       {collection}
       {onOpenChange}
       {onInputValueChange}
+      {onSelect}
+
     >
       <Combobox.Label>{destination}</Combobox.Label>
       <Combobox.Control>
