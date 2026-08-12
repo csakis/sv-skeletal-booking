@@ -5,10 +5,12 @@ import svelte from "eslint-plugin-svelte";
 import { defineConfig, includeIgnoreFile } from "eslint/config";
 import globals from "globals";
 import ts from "typescript-eslint";
+import pluginQuery from "@tanstack/eslint-plugin-query";
 
 const gitignorePath = path.resolve(import.meta.dirname, ".gitignore");
 
 export default defineConfig(
+  ...pluginQuery.configs["flat/recommended"],
   includeIgnoreFile(gitignorePath),
   js.configs.recommended,
   ts.configs.recommended,

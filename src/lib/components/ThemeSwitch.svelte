@@ -15,6 +15,7 @@
     localStorage.setItem("mode", mode);
     store.themeMode = mode;
     document.documentElement.setAttribute("data-mode", localStorage.getItem("mode") || "dark");
+    document.documentElement.setAttribute("data-theme", localStorage.getItem("theme") || "cattppuccin");
     checked = event.checked;
   }
 </script>
