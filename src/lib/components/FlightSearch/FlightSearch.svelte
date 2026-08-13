@@ -7,14 +7,19 @@
     type ComboboxRootProps,
     useListCollection
   } from "@skeletonlabs/skeleton-svelte";
-  let { destination } = $props();
+  const { destination } = $props();
   import { store } from "$lib/store.svelte";
   import { createQuery } from "@tanstack/svelte-query";
 
   let comboValue = $state("");
   const placeQuery = new Debounced(() => comboValue, 500);
 
-  const data = [];
+  type CityData = {
+    label: string,
+    value: string
+  }
+
+  const data  = [] as CityData[] | [];
 
   let items = $state(data);
 
@@ -23,9 +28,9 @@
       const data = await fetch(`/api/places?query=${placeQuery.current}`);
       const dataJson = await data.json();
       items = dataJson.data
-        .filter(({ city_name, icao_code }) => city_name && icao_code)
+        .filter(({ city_name,  icao_code }) => city_name && icao_code)
         .slice(0, 10)
-        .map(({ city_name, icao_code }) => ({ label: city_name, value: icao_code }));
+        .map(({ city_name, icao_code }) => ({ label: `${city_name} - ${icao_code}`, value: icao_code }));
     }
   });
 
@@ -41,8 +46,10 @@
     items = data;
   };
 
-  const onInputValueChange: ComboboxRootProps["onInputValueChange"] = (event) => {
-    comboValue = event.inputValue;
+  const onInputChange: ComboboxRootProps["onInputValueChange"] = (event) => {
+    if (event.inputValue !== "") {
+      comboValue = event.inputValue;
+    }
     const filtered = data.filter((item) =>
       item.value.toLowerCase().includes(event.inputValue.toLowerCase())
     );
@@ -54,8 +61,16 @@
   };
 
   function onSelect(e) {
-    comboValue = e.itemValue;
-    console.log("🚀 ~ onSelect ~ comboValue:", comboValue)
+    comboValue = e.value[0];
+    if (destination === "Departure") {
+      console.log('depart')
+      store.departureAirport = e.value[0]
+    } else if (destination === "Arrival") {
+      console.log('dest')
+      store.arrivalAirport = e.value[0]
+    } else {
+      console.error("props are incorrect:", destination);
+    }
   }
 </script>
 
@@ -63,13 +78,13 @@
   <header class="text-2xl">{destination}</header>
   <article class="mt-2">
     <Combobox
+      inputValue={comboValue}
       class="max-w-md "
       placeholder="Select {destination}"
+      onValueChange={onSelect}
       {collection}
       {onOpenChange}
-      {onInputValueChange}
-      {onSelect}
-
+      onInputValueChange={onInputChange}
     >
       <Combobox.Label>{destination}</Combobox.Label>
       <Combobox.Control>

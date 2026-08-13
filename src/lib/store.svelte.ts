@@ -1,4 +1,6 @@
 export const store = $state({
   themeMode: "",
-  theme:""
+  theme:"",
+  departureAirport:"",
+  arrivalAirport: ""
 });

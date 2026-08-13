@@ -13,3 +13,5 @@
   <FlightSearch destination="Departure" />
   <FlightSearch destination="Arrival" />
 </div>
+<p>Departure: {store.departureAirport}</p>
+<p>Arrival: {store.arrivalAirport}</p>
