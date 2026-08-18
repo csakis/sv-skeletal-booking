@@ -74,7 +74,7 @@
   }
 </script>
 
-<div class="w-full card preset-outlined p-4">
+<div class="w-1/2 card preset-outlined p-4">
   <header class="text-2xl">{destination}</header>
   <article class="mt-2">
     <Combobox
