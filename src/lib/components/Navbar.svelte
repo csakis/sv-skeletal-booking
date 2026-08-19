@@ -1,6 +1,6 @@
 <script lang="ts">
   import { AppBar } from "@skeletonlabs/skeleton-svelte";
-  import { page } from "$app/stores";
+  import { page } from "$app/state";
   import ThemeSwitch from "./ThemeSwitch.svelte";
   import UserMenu from "./UserMenu.svelte";
   import HomeIcon from "@lucide/svelte/icons/home";
@@ -9,7 +9,7 @@
 <AppBar>
   <AppBar.Toolbar class="flex items-center">
     <AppBar.Lead>
-      {#if $page.url.pathname !== "/"}
+      {#if page.url.pathname !== "/"}
         <a href="/"><HomeIcon /></a>
       {/if}
     </AppBar.Lead>

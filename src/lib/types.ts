@@ -19,7 +19,7 @@ export interface City {
 
 export interface DuffelPlace {
   id: string;
-  type: 'airport' | 'city';
+  type: "airport" | "city";
   name: string;
   iata_code: string;
   iata_country_code: string;

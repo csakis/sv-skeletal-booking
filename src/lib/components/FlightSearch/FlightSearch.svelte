@@ -8,18 +8,18 @@
     useListCollection
   } from "@skeletonlabs/skeleton-svelte";
   const { destination } = $props();
-  import { store } from "$lib/store.svelte";
+  import { store } from "#lib/store.svelte.js";
   import { createQuery } from "@tanstack/svelte-query";
 
   let comboValue = $state("");
   const placeQuery = new Debounced(() => comboValue, 500);
 
   type CityData = {
-    label: string,
-    value: string
-  }
+    label: string;
+    value: string;
+  };
 
-  const data  = [] as CityData[] | [];
+  const data = [] as CityData[] | [];
 
   let items = $state(data);
 
@@ -28,9 +28,12 @@
       const data = await fetch(`/api/places?query=${placeQuery.current}`);
       const dataJson = await data.json();
       items = dataJson.data
-        .filter(({ city_name,  icao_code }) => city_name && icao_code)
+        .filter(({ city_name, icao_code }) => city_name && icao_code)
         .slice(0, 10)
-        .map(({ city_name, icao_code }) => ({ label: `${city_name} - ${icao_code}`, value: icao_code }));
+        .map(({ city_name, icao_code }) => ({
+          label: `${city_name} - ${icao_code}`,
+          value: icao_code
+        }));
     }
   });
 
@@ -63,11 +66,11 @@
   function onSelect(e) {
     comboValue = e.value[0];
     if (destination === "Departure") {
-      console.log('depart')
-      store.departureAirport = e.value[0]
+      console.log("depart");
+      store.departureAirport = e.value[0];
     } else if (destination === "Arrival") {
-      console.log('dest')
-      store.arrivalAirport = e.value[0]
+      console.log("dest");
+      store.arrivalAirport = e.value[0];
     } else {
       console.error("props are incorrect:", destination);
     }

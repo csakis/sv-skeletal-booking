@@ -1,8 +1,8 @@
-import { DUFFEL_TOKEN } from "$env/static/private";
+import { DUFFEL_TOKEN } from "$app/env/private";
 import { json } from "@sveltejs/kit";
 
-export async function GET({url}) {
-  const query = url.searchParams.get('query');
+export async function GET({ url }) {
+  const query = url.searchParams.get("query");
   const urlQuery = `https://api.duffel.com/places/suggestions?query=${encodeURIComponent(query)}`;
   const res = await fetch(urlQuery, {
     headers: {
@@ -14,4 +14,3 @@ export async function GET({url}) {
   const data = await res.json();
   return json(data);
 }
-

@@ -7,7 +7,7 @@
   import MailwarningIcon from "@lucide/svelte/icons/mail-warning";
   import SettingsIcon from "@lucide/svelte/icons/settings";
   import { Menu, Portal } from "@skeletonlabs/skeleton-svelte";
-  import { store } from "$lib/store.svelte";
+  import { store } from "#lib/store.svelte.js";
 
   function handleSelect(e: { value: string }) {
     const themes = ["catppuccin", "rosepine", "sahara", "crimson", "cerberus", "modern"];

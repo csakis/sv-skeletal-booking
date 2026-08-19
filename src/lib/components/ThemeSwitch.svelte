@@ -2,8 +2,8 @@
   import { Switch } from "@skeletonlabs/skeleton-svelte";
   import MoonIcon from "@lucide/svelte/icons/moon";
   import SunIcon from "@lucide/svelte/icons/sun";
-  import { store } from "$lib/store.svelte";
-  import { browser } from "$app/environment";
+  import { store } from "#lib/store.svelte.js";
+  import { browser } from "$app/env";
   let checked = $state();
 
   $effect.pre(() => {
@@ -25,14 +25,13 @@
 </script>
 
 <div class="flex min-w-25 gap-1">
-	{#if browser}
-	<SunIcon class="text-yellow-500" />
+  {#if browser}
+    <SunIcon class="text-yellow-500" />
+
     <Switch {checked} {onCheckedChange}>
-      <Switch.Control>
-        <Switch.Thumb />
-      </Switch.Control>
+      <Switch.Control><Switch.Thumb /></Switch.Control>
       <Switch.HiddenInput />
     </Switch>
     <MoonIcon />
-		{/if}
-  </div>
+  {/if}
+</div>

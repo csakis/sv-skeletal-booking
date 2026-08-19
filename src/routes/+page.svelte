@@ -1,8 +1,8 @@
 <script>
-  import DatePicker from "$lib/components/DatePicker.svelte";
-  import FlightSearch from "$lib/components/FlightSearch/FlightSearch.svelte";
-  import Navbar from "$lib/components/Navbar.svelte";
-  import { store } from "$lib/store.svelte";
+  import DatePicker from "#lib/components/DatePicker.svelte";
+  import FlightSearch from "#lib/components/FlightSearch/FlightSearch.svelte";
+  import Navbar from "#lib/components/Navbar.svelte";
+  import { store } from "#lib/store.svelte.js";
 
   $effect.pre(() => {
     store.themeMode = localStorage.getItem("mode") || "light";
@@ -11,7 +11,7 @@
 </script>
 
 <div class="flex w-full">
-  <div class="w-1/2 card preset-outlined p-4 ">
+  <div class="w-1/2 card preset-outlined p-4">
     <div class="flex w-full items-end gap-3">
       <FlightSearch destination="Departure" />
       <DatePicker destination="Departure" />
