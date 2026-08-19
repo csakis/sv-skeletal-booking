@@ -11,15 +11,13 @@
   const maxDate = $derived(destination === "Departure" && store.arrivalDate ? store.arrivalDate : "");
 
 </script>
+<div class="h-[100]">
 
-{#if destination === "Departure" }
-<label >Departure
 
+  {#if destination === "Departure" }
   <input type="date" name="departureDate" bind:value={store.departureDate} min={parseDate(minDate).toString()} max={maxDate.toString()}>
-</label>
-{/if}
-{#if destination === "Arrival" }
-<label> Arrival
+  {/if}
+  {#if destination === "Arrival" }
   <input type="date" name="arrivalDate" bind:value={store.arrivalDate} min={parseDate(minDate).toString()} max={maxDate.toString()}>
-</label>
-{/if}
+  {/if}
+</div>

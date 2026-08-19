@@ -7,6 +7,9 @@ export default defineConfig({
   plugins: [
     tailwindcss(),
     sveltekit({
+      kit: {
+        remoteFunctions: true
+      },
       compilerOptions: {
         experimental: {
           async: true
